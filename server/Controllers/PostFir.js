@@ -1,4 +1,4 @@
-import { cloudinary } from "../Config/cloudinary.js";
+import cloudinary from "../Config/cloudinary.js";
 import { FirModel } from "../Schema/FirSchema.js";
 
 export const Postefir = async (req, res) => {
