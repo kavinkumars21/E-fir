@@ -1,14 +1,9 @@
 import { Button, Card, Form, Col, message, Select } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
-import { getFullFaceDescription } from "../../../faceUtil";
-import {
-  DEFAULT_WEBCAM_RESOLUTION,
-  inputSize,
-  webcamResolutionType,
-} from "../../../globalData";
-import { CheckError } from "../../../utils/ErrorHandling";
-import { drawFaceRect } from "../../../utils/drawFaceRect";
+import { getFullFaceDescription } from "../../faceUtil";
+import { CheckError } from "../../Util/ErrorHandling";
+import { drawFaceRect } from "../../Util/drawFaceRect";
 
 const { Option } = Select;
 
@@ -18,8 +13,8 @@ export const UploadFromWebcam = ({
   countRefetch,
   loading,
 }) => {
-  const [camWidth, setCamWidth] = useState(DEFAULT_WEBCAM_RESOLUTION.width);
-  const [camHeight, setCamHeight] = useState(DEFAULT_WEBCAM_RESOLUTION.height);
+  const [camWidth, setCamWidth] = useState('640');
+  const [camHeight, setCamHeight] = useState('480');
   const [inputDevices, setInputDevices] = useState([]);
   const [selectedWebcam, setSelectedWebcam] = useState();
 
@@ -38,6 +33,16 @@ export const UploadFromWebcam = ({
   const handleSelectWebcam = (value) => {
     setSelectedWebcam(value);
   };
+
+  const webcamResolutionType = [
+    {label: '300x250',width: 300,height: 250},
+    {label: '500x350',width: 500,height: 350},
+    {label: '640x480',width: 640,height: 480},
+    {label: '960x720',width: 960,height: 720},
+    {label: '1024x768',width: 1024,height: 768},
+    {label: '1280x960',width: 1280,height: 960}
+  ];
+
   const handleWebcamResolution = (value) => {
     webcamResolutionType.map((type) => {
       if (value === type.label) {
@@ -76,7 +81,7 @@ export const UploadFromWebcam = ({
         // e.g. const obj = await net.detect(video);
 
         // Draw mesh
-        getFullFaceDescription(webcamRef.current.getScreenshot(), inputSize)
+        getFullFaceDescription(webcamRef.current.getScreenshot(), 160) //inputsize = 160
           .then((data) => {
             setFullDesc(data);
             setFaceDescriptor(data[0]?.descriptor);
@@ -135,7 +140,7 @@ export const UploadFromWebcam = ({
         </Form.Item>
         <Form.Item label="Webcam Size">
           <Select
-            defaultValue={DEFAULT_WEBCAM_RESOLUTION.label}
+            defaultValue='640x480'
             style={{ width: 200 }}
             onChange={handleWebcamResolution}
           >
