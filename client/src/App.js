@@ -1,13 +1,14 @@
 import React from 'react'
+import { AddFacePhoto } from './components/faceGallery/addFacePhoto'
 // import FaceGallery from './components/faceGallery';
-import addFacePhoto from './components/faceGallery/addFacePhoto';
 
 function App() {
 
 	return (
 		<div>
 			{/* <FaceGallery /> */}
-			<addFacePhoto />
+			<AddFacePhoto />
+			<h1>hai</h1>
 		</div>
 	)
 }

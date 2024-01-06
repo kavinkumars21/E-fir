@@ -10,12 +10,17 @@ import {
 import ModelLoadStatus from "../../Util/ModelLoadStatus";
 import ModelLoading from "../../Util/ModelLoading";
 import { UploadFromDisk } from "./UploadFromDisk";
+import { UploadFromWebcam } from "./UploadFromWebcam";
 
-export const addFacePhoto = ({ galleryRefetch, countRefetch }) => {
+export const AddFacePhoto = ({ galleryRefetch, countRefetch }) => {
 
   const [isAllModelLoaded, setIsAllModelLoaded] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
   const [loadingMessageError, setLoadingMessageError] = useState("");
+
+  const [selectedUploadOption, setSelectedUploadOption] = useState("From Disk");
+
+  const { Option } = Select;
 
   // const [addFacePhotoCallback, { loading }] = useMutation(
   //   ADD_FACE_PHOTO_MUTATION,
@@ -29,6 +34,12 @@ export const addFacePhoto = ({ galleryRefetch, countRefetch }) => {
   // const handleSelectUploadOption = (value) => {
   //   setSelectedUploadOption(value);
   // };
+
+  const UPLOAD_OPTION = ['From Disk', 'From Webcam'];
+
+  const handleSelectUploadOption = (value) => {
+    setSelectedUploadOption(value);
+  };
 
   useEffect(() => {
     async function loadingtheModel() {
@@ -60,12 +71,36 @@ export const addFacePhoto = ({ galleryRefetch, countRefetch }) => {
         isAllModelLoaded &&
         loadingMessageError.length === 0 && (
           <div>
+            <Form>
+                <Form.Item label="Upload Option">
+                  <Select
+                    defaultValue="From Disk"
+                    style={{ width: 200 }}
+                    onChange={handleSelectUploadOption}
+                  >
+                    {UPLOAD_OPTION.map((op) => (
+                      <Option key={op} value={op}>
+                        {op}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Form>
+            {selectedUploadOption === "From Disk" ? (
             <UploadFromDisk
-              addFacePhotoCallback={addFacePhotoCallback}
+              // addFacePhotoCallback={addFacePhotoCallback}
               galleryRefetch={galleryRefetch}
               countRefetch={countRefetch}
               // loading={loading}
             />
+            ) : (
+              <UploadFromWebcam
+                // addFacePhotoCallback={addFacePhotoCallback}
+                galleryRefetch={galleryRefetch}
+                countRefetch={countRefetch}
+                // loading={loading}
+              />
+            )}
           </div>))}
     </Card>
   );
