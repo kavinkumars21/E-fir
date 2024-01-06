@@ -1,4 +1,4 @@
-import { Button, Card, Form, Col, message, Select } from "antd";
+import { Button, Card, Form, message, Select } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { getFullFaceDescription } from "../../faceUtil";

@@ -1,6 +1,5 @@
-import { Card, Col, Form, Row, Select } from "antd";
+import { Card, Form, Select } from "antd";
 import React, { useEffect, useState } from "react";
-import { CheckError } from "../../Util/ErrorHandling";
 import {
   isFaceDetectionModelLoaded,
   isFacialLandmarkDetectionModelLoaded,
@@ -21,19 +20,6 @@ export const AddFacePhoto = ({ galleryRefetch, countRefetch }) => {
   const [selectedUploadOption, setSelectedUploadOption] = useState("From Disk");
 
   const { Option } = Select;
-
-  // const [addFacePhotoCallback, { loading }] = useMutation(
-  //   ADD_FACE_PHOTO_MUTATION,
-  //   {
-  //     onError(err) {
-  //       CheckError(err);
-  //     },
-  //   }
-  // );
-
-  // const handleSelectUploadOption = (value) => {
-  //   setSelectedUploadOption(value);
-  // };
 
   const UPLOAD_OPTION = ['From Disk', 'From Webcam'];
 
