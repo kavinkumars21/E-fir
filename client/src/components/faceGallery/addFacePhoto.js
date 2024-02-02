@@ -1,4 +1,5 @@
 import { Card, Form, Select } from "antd";
+import './style.css'
 import React, { useEffect, useState } from "react";
 import {
   isFaceDetectionModelLoaded,
@@ -11,7 +12,7 @@ import ModelLoading from "../../Util/ModelLoading";
 import { UploadFromDisk } from "./UploadFromDisk";
 import { UploadFromWebcam } from "./UploadFromWebcam";
 
-export const AddFacePhoto = ({ galleryRefetch, countRefetch }) => {
+export const AddFacePhoto = ({ galleryRefetch, countRefetch, imagedetails }) => {
 
   const [isAllModelLoaded, setIsAllModelLoaded] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
@@ -42,6 +43,11 @@ export const AddFacePhoto = ({ galleryRefetch, countRefetch }) => {
 
     loadingtheModel();
   }, [isAllModelLoaded]);
+
+  const variablesdata = (data) => {
+    // console.log(data);
+    imagedetails(data);
+  }
 
   return (
     <Card>
@@ -75,15 +81,16 @@ export const AddFacePhoto = ({ galleryRefetch, countRefetch }) => {
             {selectedUploadOption === "From Disk" ? (
             <UploadFromDisk
               // addFacePhotoCallback={addFacePhotoCallback}
-              galleryRefetch={galleryRefetch}
-              countRefetch={countRefetch}
+              // galleryRefetch={galleryRefetch}
+              // countRefetch={countRefetch}
               // loading={loading}
+              variablesdata={variablesdata}
             />
             ) : (
               <UploadFromWebcam
                 // addFacePhotoCallback={addFacePhotoCallback}
-                galleryRefetch={galleryRefetch}
-                countRefetch={countRefetch}
+                // galleryRefetch={galleryRefetch}
+                // countRefetch={countRefetch}
                 // loading={loading}
               />
             )}

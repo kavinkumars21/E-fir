@@ -1,0 +1,11 @@
+.main {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    gap: 40px;
+}
+
+.link {
+    font-size: large;
+    text-decoration: double;
+}

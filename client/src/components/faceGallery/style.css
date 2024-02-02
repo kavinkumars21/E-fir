@@ -1,0 +1,11 @@
+input{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: azure;
+}
+
+input:focus{
+    outline: none;
+    background-color: antiquewhite;
+}

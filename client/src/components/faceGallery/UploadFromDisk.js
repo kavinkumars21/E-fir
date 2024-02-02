@@ -14,9 +14,10 @@ function getBase64(file) {
 }
 const inputSize = 160;
 export const UploadFromDisk = ({
-  addFacePhotoCallback,
-  galleryRefetch,
-  countRefetch,
+  // addFacePhotoCallback,
+  // galleryRefetch,
+  // countRefetch,
+  variablesdata,
   loading,
 }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -67,23 +68,29 @@ export const UploadFromDisk = ({
       );
     }
   };
-  
+  const variables = {
+    photoData: previewImage,
+    faceDescriptor: faceDescriptor.toString()
+  }
+
+
   const handleSubmit = () => {
     if (previewImage.length > 0 && faceDescriptor.length === 128)
-      addFacePhotoCallback({
-        update(_, data) {
-          galleryRefetch();
-          countRefetch();
-          message.success("Add Face Photo Success!");
-        },
-        onError(err) {
-          CheckError(err);
-        },
-        variables: {
-          photoData: previewImage,
-          faceDescriptor: faceDescriptor.toString(),
-        },
-      });
+      // addFacePhotoCallback({
+      //   update(_, data) {
+      //     galleryRefetch();
+      //     countRefetch();
+      //     message.success("Add Face Photo Success!");
+      //   },
+      //   onError(err) {
+      //     CheckError(err);
+      //   },
+      // const  variables= {
+      //     photoData: previewImage
+      //     faceDescriptor: faceDescriptor.toString()
+      //   }
+      // });
+      variablesdata(variables);
   };
   return (
     <>
