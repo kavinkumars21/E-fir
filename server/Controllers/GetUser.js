@@ -1,8 +1,8 @@
-import { UserModel } from "../Schema/UserSchema.js";
+import { FirModel } from "../Schema/FirSchema.js";
 
 export const Getuser = (req, res) => {
 
-    UserModel.find().then((data) => {
+    FirModel.find().then((data) => {
         res.send({
             status: 200,
             message: "User found",

@@ -8,14 +8,15 @@ export const drawRectAndLabelFace = (descriptions, faceDB, participants, ctx) =>
 
 console.log(landmarksPoint)
       // const text = desc['class'];
+      console.log(faceDB);
       const bestMatch = faceDB.findBestMatch(desc.descriptor);
       // Set styling
       if (bestMatch._label != "unknown") {
         let filterParticipants = participants.filter(
-          (participant) => participant.student._id == bestMatch._label
+          (participant) => participant._id == bestMatch._label
         );
         console.log(filterParticipants);
-        bestMatch._label = filterParticipants[0].student.firstName +" "+ filterParticipants[0].student.lastName + " (" + filterParticipants[0].student.cardID + ")";
+        bestMatch._label = filterParticipants[0].firstName +" "+ filterParticipants[0].lastName;
       }
 
       ctx.font = "normal 18px Gotham, Helvetica Neue, sans-serif";

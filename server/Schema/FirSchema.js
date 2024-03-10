@@ -21,10 +21,10 @@ const FirSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    fathername: {
-        type: String,
-        required: true,
-    },
+    // fathername: {
+    //     type: String,
+    //     required: true,
+    // },
     section: {
         type: String,
         required: true,

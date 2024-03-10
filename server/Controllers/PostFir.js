@@ -8,8 +8,9 @@ export const Postefir = async (req, res) => {
     const lastName = req.body.lastName;
     const Name = firstName+lastName;
 
-    const uploadedResponse = await cloudinary.uploader.upload(Image, {
+    const uploadedResponse = await cloudinary.v2.uploader.upload(Image, {
         folder: `FirImage/${Name}`,
+        use_filename: true
     });
     
     const fir = new FirModel({
@@ -18,7 +19,7 @@ export const Postefir = async (req, res) => {
         age: req.body.age,
         address: req.body.address,
         phonenumber: req.body.phonenumber,
-        fathername: req.body.fathername,
+        // fathername: req.body.fathername,
         section: req.body.section,
         photoURL: uploadedResponse.secure_url,
         photoPublicID: uploadedResponse.public_id,
