@@ -9,15 +9,15 @@ app.use(bodyParser.json());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 const provider = new JsonRpcProvider("http://localhost:8545"); // Connect to your local Ethereum node
-const contractAddress = "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1"; // Replace with deployed contract address
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Replace with deployed contract address
 const contractabi = abi.abi; // Replace with contract ABI
 
 const contract = new ethers.Contract(contractAddress, contractabi, provider);
 
 app.post('/setData', async (req, res) => {
-    const { data } = req.body;
+    const { firstName, lastName, age, addressInfo, phoneNumber, section, faceDescriptor } = req.body;
     try {
-        await contract.setPerson(data);
+        await contract.setPerson(firstName, lastName, age, addressInfo, phoneNumber, section, faceDescriptor);
         res.send('Data stored successfully.');
     } catch (error) {
         console.error(error);

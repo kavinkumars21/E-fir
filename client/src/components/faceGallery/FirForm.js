@@ -7,8 +7,8 @@ function FirForm() {
     const [firstName, setfirstname] = useState();
     const [lastName, setlastname] = useState();
     const [age, setage] = useState();
-    const [address, setaddress] = useState();
-    const [phonenumber, setphonenumber] = useState();
+    const [addressInfo, setaddress] = useState();
+    const [phoneNumber, setphonenumber] = useState();
     const [section, setsection] = useState();
     const [Image, setimage] = useState();
     const [faceDescriptor, setFaceDescriptor] = useState();
@@ -18,11 +18,11 @@ function FirForm() {
         setFaceDescriptor(data.faceDescriptor)
     }
 
-    console.log(firstName,lastName,age,address,phonenumber,section,Image,faceDescriptor);
+    console.log(firstName,lastName,age,addressInfo,phoneNumber,section,Image,faceDescriptor);
 
     const handlesubmit = () => {
-        const data = { firstName,lastName,age,address,phonenumber,section,Image,faceDescriptor };
-        axios.post("http://localhost:5000/api/postfir", data)
+        const data = { firstName,lastName,age,addressInfo,phoneNumber,section,faceDescriptor };
+        axios.post("http://localhost:5000/setData", data)
     }
 
     return (
