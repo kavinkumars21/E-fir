@@ -1,66 +1,98 @@
-import React, { useState } from 'react'
-import { AddFacePhoto } from './addFacePhoto'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { AddFacePhoto } from './addFacePhoto'; // Import for AddFacePhoto component
+import Web3 from 'web3';
+import { ethers } from 'ethers';
+import abi from "./SimpleStorage.json"; // Import your contract ABI
 
 function FirForm() {
 
-    const [firstName, setfirstname] = useState();
-    const [lastName, setlastname] = useState();
-    const [age, setage] = useState();
-    const [addressInfo, setaddress] = useState();
-    const [phoneNumber, setphonenumber] = useState();
-    const [section, setsection] = useState();
-    const [Image, setimage] = useState();
-    const [faceDescriptor, setFaceDescriptor] = useState();
+  const [firstName, setfirstname] = useState();
+  const [lastName, setlastname] = useState();
+  const [age, setage] = useState();
+  const [addressInfo, setaddress] = useState();
+  const [phoneNumber, setphonenumber] = useState();
+  const [section, setsection] = useState();
+  const [Image, setimage] = useState();
+  const [faceDescriptor, setFaceDescriptor] = useState();
 
-    const imagedetails = (data) => {
-        setimage(data.photoData);
-        setFaceDescriptor(data.faceDescriptor)
+  const contractAddress = '0x4fc6Dcc0ADd89F9D61705309F192a433238CE3e8';
+  const contractAbi = abi;
+
+  useEffect(() => {
+    async function loadWeb3() {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        window.web3 = new Web3(window.ethereum);
+        console.log('Connected accounts:', accounts);
+      } else if (window.web3) {
+        window.web3 = new Web3(window.web3.currentProvider);
+      } else {
+        alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+      }
     }
+    loadWeb3();
+  }, []);
 
-    console.log(firstName,lastName,age,addressInfo,phoneNumber,section,Image,faceDescriptor);
+  const handlesubmit = async (event) => {
+    event.preventDefault();
 
-    const handlesubmit = () => {
-        const data = { firstName,lastName,age,addressInfo,phoneNumber,section,faceDescriptor };
-        axios.post("http://localhost:5000/setData", data)
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+    try {
+      await contract.setPerson(firstName, lastName, age, addressInfo, phoneNumber, section, faceDescriptor);
+      alert('Data stored successfully.');
+    } catch (error) {
+      console.error('Error storing data:', error);
+      alert('Error storing data.');
     }
+  };
 
-    return (
-        <div>
-            <form onSubmit={handlesubmit}>
-                <label for="firstname">Firstname</label>
-                <br />
-                <input type="text" id="firstname" placeholder="Firstname" onChange={e => setfirstname(e.target.value)}/>
-                <br />
-                <label for="lastname">Lastname</label>
-                <br />
-                <input type="text" id="lastname" placeholder="Lastname" onChange={e => setlastname(e.target.value)}/>
-                <br />
-                <label for="age">Age</label>
-                <br />
-                <input type="number" id="age" placeholder="Age" onChange={e => setage(e.target.value)}/>
-                <br />
-                <label for="address">Address</label>
-                <br />
-                <input type="text" id="address" placeholder="Address" onChange={e => setaddress(e.target.value)}/>
-                <br />
-                <label for="phonenumber">Phone number</label>
-                <br />
-                <input type="tel" id="phonenumber" placeholder="Phone number" onChange={e => setphonenumber(e.target.value)}/>
-                <br />
-                <label for="section">Des</label>
-                <br />
-                <input type="text" id="section" placeholder="Des" onChange={e => setsection(e.target.value)}/>
-                <br />
-                <br />
-                <p>Upload Picture</p>
-                <AddFacePhoto imagedetails={imagedetails}/>
-                <button>Submit</button>
-                <br />
-                <br />
-            </form>
-        </div>
-    )
+  const imagedetails = (data) => {
+    setimage(data.photoData);
+    setFaceDescriptor(data.faceDescriptor);
+  }
+
+  // Logs state for debugging purposes (optional)
+  console.log(firstName, lastName, age, addressInfo, phoneNumber, section, Image, faceDescriptor);
+
+  return (
+    <div>
+      <form onSubmit={handlesubmit}>
+        <label for="firstname">Firstname</label>
+        <br />
+        <input type="text" id="firstname" placeholder="Firstname" onChange={e => setfirstname(e.target.value)} />
+        <br />
+        <label for="lastname">Lastname</label>
+        <br />
+        <input type="text" id="lastname" placeholder="Lastname" onChange={e => setlastname(e.target.value)} />
+        <br />
+        <label for="age">Age</label>
+        <br />
+        <input type="number" id="age" placeholder="Age" onChange={e => setage(e.target.value)} />
+        <br />
+        <label for="address">Address</label>
+        <br />
+        <input type="text" id="address" placeholder="Address" onChange={e => setaddress(e.target.value)} />
+        <br />
+        <label for="phonenumber">Phone number</label>
+        <br />
+        <input type="tel" id="phonenumber" placeholder="Phone number" onChange={e => setphonenumber(e.target.value)} />
+        <br />
+        <label for="section">Des</label>
+        <br />
+        <input type="text" id="section" placeholder="Des" onChange={e => setsection(e.target.value)} />
+        <br />
+        <br />
+        <p>Upload Picture</p>
+        <AddFacePhoto imagedetails={imagedetails}/> {/* Pass imagedetails function as prop */}
+        <button>Submit</button>
+        <br />
+        <br />
+      </form>
+    </div>
+  )
 }
 
-export default FirForm
+export default FirForm;

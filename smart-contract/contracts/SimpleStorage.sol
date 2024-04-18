@@ -1,4 +1,3 @@
-// SimpleStorage.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -24,24 +23,25 @@ contract SimpleStorage {
         string memory _section,
         string memory _faceDescriptor
     ) public {
-        Person storage person = people[msg.sender];
-        person.firstName = _firstName;
-        person.lastName = _lastName;
-        person.age = _age;
-        person.addressInfo = _addressInfo;
-        person.phoneNumber = _phoneNumber;
-        person.section = _section;
-        person.faceDescriptor = _faceDescriptor;
+        people[msg.sender] = Person({
+            firstName: _firstName,
+            lastName: _lastName,
+            age: _age,
+            addressInfo: _addressInfo,
+            phoneNumber: _phoneNumber,
+            section: _section,
+            faceDescriptor: _faceDescriptor
+        });
     }
 
     function getPerson() public view returns (
-        string memory,
-        string memory,
-        uint256,
-        string memory,
-        string memory,
-        string memory,
-        string memory
+        string memory firstName,
+        string memory lastName,
+        uint256 age,
+        string memory addressInfo,
+        string memory phoneNumber,
+        string memory section,
+        string memory faceDescriptor
     ) {
         Person memory person = people[msg.sender];
         return (
