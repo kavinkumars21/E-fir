@@ -15,7 +15,7 @@ function FirForm() {
   const [Image, setimage] = useState();
   const [faceDescriptor, setFaceDescriptor] = useState();
 
-  const contractAddress = '0x4fc6Dcc0ADd89F9D61705309F192a433238CE3e8';
+  const contractAddress = '';
   const contractAbi = abi;
 
   useEffect(() => {
