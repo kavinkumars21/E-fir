@@ -1,49 +1,62 @@
 [
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "getAllPersons",
+		"outputs": [
 			{
-				"internalType": "string",
-				"name": "_firstName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_lastName",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_age",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_addressInfo",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_phoneNumber",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_section",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_faceDescriptor",
-				"type": "string"
+				"components": [
+					{
+						"internalType": "string",
+						"name": "firstName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "lastName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "age",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "addressInfo",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "phoneNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "section",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "faceDescriptor",
+						"type": "string"
+					}
+				],
+				"internalType": "struct SimpleStorage.Person[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
-		"name": "setPerson",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
 		"name": "getPerson",
 		"outputs": [
 			{
@@ -88,9 +101,9 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
+				"internalType": "uint256",
 				"name": "",
-				"type": "address"
+				"type": "uint256"
 			}
 		],
 		"name": "people",
@@ -132,6 +145,49 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_firstName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_lastName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_age",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_addressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_section",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_faceDescriptor",
+				"type": "string"
+			}
+		],
+		"name": "setPerson",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

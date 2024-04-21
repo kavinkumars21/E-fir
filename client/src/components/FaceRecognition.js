@@ -17,6 +17,9 @@ import {
 import { drawRectAndLabelFace } from "../Util/drawRectAndLabelFace";
 import ModelLoading from "../Util/ModelLoading";
 import ModelLoadStatus from "../Util/ModelLoadStatus";
+import Web3 from 'web3';
+import { ethers } from 'ethers';
+import abi from "./faceGallery/SimpleStorage.json";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -66,20 +69,72 @@ function FaceRecognition() {
   //   }
   //   );
 
+  // block chain -- start
+
+  const contractAddress = '';
+  const contractAbi = abi;
 
   useEffect(() => {
-    async function fetch() {
-      try {
-        const response = await axios.get("http://localhost:5000/api/getuser");
-        setdata(response.data.data);
-        console.log(response.data);
-        setParticipants(response.data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+    async function loadWeb3() {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        window.web3 = new Web3(window.ethereum);
+        console.log('Connected accounts:', accounts);
+      } else if (window.web3) {
+        window.web3 = new Web3(window.web3.currentProvider);
+      } else {
+        alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
       }
     }
-      fetch()
+    loadWeb3();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const signer = await provider.getSigner();
+          const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+          const result = await contract.getAllPersons();
+        const data = result.map((person, index) => {
+          return {
+              _id: `index + 1`,
+              firstName: person[0],
+              lastName: person[1],
+              age: person[2],
+              address: person[3],
+              phonenumber: person[4],
+              section: person[5],
+              faceDescriptor: person[6]
+          };
+      });
+      console.log('Data from smart contract:', data);
+      setdata(data);
+      setParticipants(data);
+      return data;
+      } catch (error) {
+          console.error('Error retrieving data:', error);
+      }
+  }
+      fetchData()
   },[])
+
+  // block chain -- end
+
+  
+  // useEffect(() => {
+  //   async function fetch() {
+  //     try {
+  //       const response = await axios.get("http://localhost:5000/api/getuser");
+  //       setdata(response.data.data);
+  //       console.log(response.data.data);
+  //       setParticipants(response.data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   }
+  //     fetch()
+  // },[])
 
   useEffect(() => {
     async function initializeMatcher() {

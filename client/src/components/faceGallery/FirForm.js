@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { AddFacePhoto } from './addFacePhoto'; // Import for AddFacePhoto component
+import { AddFacePhoto } from './addFacePhoto';
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import abi from "./SimpleStorage.json"; // Import your contract ABI
+import abi from "./SimpleStorage.json";
 
 function FirForm() {
 
@@ -53,8 +53,7 @@ function FirForm() {
     setimage(data.photoData);
     setFaceDescriptor(data.faceDescriptor);
   }
-
-  // Logs state for debugging purposes (optional)
+  
   console.log(firstName, lastName, age, addressInfo, phoneNumber, section, Image, faceDescriptor);
 
   return (

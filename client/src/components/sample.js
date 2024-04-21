@@ -28,8 +28,22 @@ function Sample() {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
             const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-            const result = await contract.getPerson();
-            console.log('Data from smart contract:', result);
+            const result = await contract.getAllPersons();
+            console.log('Data from smart contract:');
+          const data = result.map((person, index) => {
+            return {
+                _id: `${index + 0}`,
+                firstName: person[0],
+                lastName: person[1],
+                age: person[2],
+                address: person[3],
+                phonenumber: person[4],
+                section: person[5],
+                faceDescriptor: person[6]
+            };
+        });
+        console.log('Data from smart contract:', data);
+        return data;
         } catch (error) {
             console.error('Error retrieving data:', error);
         }
