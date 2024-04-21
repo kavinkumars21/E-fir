@@ -32,7 +32,7 @@ function Sample() {
             console.log('Data from smart contract:');
           const data = result.map((person, index) => {
             return {
-                _id: `${index + 0}`,
+                _id: `${index + 1}`,
                 firstName: person[0],
                 lastName: person[1],
                 age: person[2],

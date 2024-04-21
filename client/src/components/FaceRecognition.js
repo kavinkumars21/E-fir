@@ -98,7 +98,7 @@ function FaceRecognition() {
           const result = await contract.getAllPersons();
         const data = result.map((person, index) => {
           return {
-              _id: `index + 1`,
+              _id: `${index + 1}`,
               firstName: person[0],
               lastName: person[1],
               age: person[2],
