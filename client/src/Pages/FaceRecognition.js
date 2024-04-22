@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from 'axios'
-// import { useMutation } from "@apollo/react-hooks";
 import { Card, Form, Layout, message, Row, Select, Typography } from "antd";
 import Webcam from "react-webcam";
-// import { FaceThresholdDistanceContext } from "../../../context";
 import { CheckError } from "../Util/ErrorHandling";
 import {
   getFullFaceDescription,
@@ -13,21 +11,18 @@ import {
   loadModels,
   createMatcher
 } from "../faceUtil";
-// import { CREATE_TRX_MUTATION } from "../../../graphql/mutation";
 import { drawRectAndLabelFace } from "../Util/drawRectAndLabelFace";
 import ModelLoading from "../Util/ModelLoading";
 import ModelLoadStatus from "../Util/ModelLoadStatus";
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import abi from "./faceGallery/SimpleStorage.json";
+import abi from "../Util/SimpleStorage.json";
 
 const { Title } = Typography;
 const { Content } = Layout;
 const { Option } = Select;
 
 function FaceRecognition() {
-
-  // const { threshold } = useContext(FaceThresholdDistanceContext);
 
   const webcamRef = useRef();
   const canvasRef = useRef();
@@ -57,21 +52,7 @@ function FaceRecognition() {
     { label: '1280x960', width: 1280, height: 960 }
   ];
 
-  // const [ createTrxCallback ] = useMutation(
-  //   CREATE_TRX_MUTATION,
-  //   {
-  //     update(_, { data }) {
-  //       if (data.createTrx != "") message.success(data.createTrx);
-  //     },
-  //     onError(err) {
-  //       CheckError(err);
-  //     },
-  //   }
-  //   );
-
-  // block chain -- start
-
-  const contractAddress = '';
+  const contractAddress = '0x8ceb750b98b6f266fb725d2d41fb8af043e90235';
   const contractAbi = abi;
 
   useEffect(() => {
@@ -118,9 +99,6 @@ function FaceRecognition() {
   }
       fetchData()
   },[])
-
-  // block chain -- end
-
   
   // useEffect(() => {
   //   async function fetch() {
@@ -200,30 +178,13 @@ function FaceRecognition() {
               "Preparing face matcher and device setup, please wait..."
             );
           });
-
-        // if (!!fullDesc) {
-        //   console.log("Now got full desc");
-        //   fullDesc.map((desc) => {
-        //     const bestMatch = faceMatcher.findBestMatch(desc.descriptor);
-        //     console.log(bestMatch);
-        //     if (bestMatch._label != "unknown") {
-        //       // createTrxCallback({
-        //       //   variables: {
-        //       //     attendanceID: props.match.params.attendanceID,
-        //       //     studentID: bestMatch._label,
-        //       //   },
-        //       // });
-        //       console.log("Saving in db now");
-        //     }
-        //   });
-        // }
       }
     }
 
     let interval = setInterval(() => {
       capture();
       if (fullDesc && faceMatcher && participants) {
-        clearInterval(interval); // Stop capturing once everything is ready
+        clearInterval(interval);
         const ctx = canvasRef.current.getContext("2d");
         drawRectAndLabelFace(fullDesc, faceMatcher, participants, ctx);
       }

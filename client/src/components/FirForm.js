@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { AddFacePhoto } from './addFacePhoto';
+import { AddFacePhoto } from './faceGallery/addFacePhoto';
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import abi from "./SimpleStorage.json";
+import abi from "../Util/SimpleStorage.json";
 
 function FirForm() {
 
@@ -15,7 +15,7 @@ function FirForm() {
   const [Image, setimage] = useState();
   const [faceDescriptor, setFaceDescriptor] = useState();
 
-  const contractAddress = '';
+  const contractAddress = '0x8ceb750b98b6f266fb725d2d41fb8af043e90235';
   const contractAbi = abi;
 
   useEffect(() => {

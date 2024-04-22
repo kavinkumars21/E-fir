@@ -76,20 +76,6 @@ export const UploadFromDisk = ({
 
   const handleSubmit = () => {
     if (previewImage.length > 0 && faceDescriptor.length === 128)
-      // addFacePhotoCallback({
-      //   update(_, data) {
-      //     galleryRefetch();
-      //     countRefetch();
-      //     message.success("Add Face Photo Success!");
-      //   },
-      //   onError(err) {
-      //     CheckError(err);
-      //   },
-      // const  variables= {
-      //     photoData: previewImage
-      //     faceDescriptor: faceDescriptor.toString()
-      //   }
-      // });
       variablesdata(variables);
   };
   return (

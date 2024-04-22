@@ -1,6 +1,5 @@
 import React from 'react'
-import { AddFacePhoto } from './faceGallery/addFacePhoto'
-import FirForm from './faceGallery/FirForm'
+import FirForm from '../components/FirForm'
 
 function FirFormPage() {
   return (

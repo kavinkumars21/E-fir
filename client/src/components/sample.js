@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import abi from "./faceGallery/SimpleStorage.json";
+import abi from "../Util/SimpleStorage.json";
 
 function Sample() {
 
-    const contractAddress = '';
+    const contractAddress = '0x8ceb750b98b6f266fb725d2d41fb8af043e90235';
   const contractAbi = abi;
 
   useEffect(() => {
