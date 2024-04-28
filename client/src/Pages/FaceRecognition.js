@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from 'axios'
 import { Card, Form, Layout, message, Row, Select, Typography } from "antd";
 import Webcam from "react-webcam";
@@ -52,7 +52,7 @@ function FaceRecognition() {
     { label: '1280x960', width: 1280, height: 960 }
   ];
 
-  const contractAddress = '0x8ceb750b98b6f266fb725d2d41fb8af043e90235';
+  const contractAddress = '';
   const contractAbi = abi;
 
   useEffect(() => {

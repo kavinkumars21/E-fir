@@ -5,7 +5,7 @@ import abi from "../Util/SimpleStorage.json";
 
 function Sample() {
 
-    const contractAddress = '0x8ceb750b98b6f266fb725d2d41fb8af043e90235';
+    const contractAddress = '';
   const contractAbi = abi;
 
   useEffect(() => {

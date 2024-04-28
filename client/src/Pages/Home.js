@@ -7,8 +7,9 @@ function Home() {
   return (
     <div className='main'>
       <div className='links'>
-        <Link to='fir' className='link'>Register Fir</Link>
-        <Link to='reg' className='link'>Face Recognition</Link>
+        <Link to='registerfir' className='link'>Register Fir</Link>
+        <Link to='recognizeface' className='link'>Face Recognition</Link>
+        <Link to='updatefir' className='link'>Update FIR</Link>
         {/* <Link to='sample' className='link'>sample</Link> */}
       </div>
     </div>

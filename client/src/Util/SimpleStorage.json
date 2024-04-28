@@ -1,5 +1,24 @@
 [
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			}
+		],
+		"name": "PersonAdded",
+		"type": "event"
+	},
+	{
 		"inputs": [],
 		"name": "getAllPersons",
 		"outputs": [
@@ -52,12 +71,80 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			}
+		],
+		"name": "getIndexByPhoneNumber",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "index",
 				"type": "uint256"
 			}
 		],
 		"name": "getPerson",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "firstName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "lastName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "age",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "addressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "section",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "faceDescriptor",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			}
+		],
+		"name": "getPersonByPhoneNumber",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -186,6 +273,49 @@
 			}
 		],
 		"name": "setPerson",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newFirstName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newLastName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_newAge",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_newAddressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newSection",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newFaceDescriptor",
+				"type": "string"
+			}
+		],
+		"name": "updatePerson",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
