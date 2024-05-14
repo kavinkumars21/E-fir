@@ -1,0 +1,418 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			}
+		],
+		"name": "FIRAdded",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "firs",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dateOfBirth",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "addressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dateOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "timeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "placeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "faceDescriptor",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "image",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllFIR",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "dateOfBirth",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "addressInfo",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "phoneNumber",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "dateOfIncident",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "timeOfIncident",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "placeOfIncident",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "faceDescriptor",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "image",
+						"type": "string"
+					}
+				],
+				"internalType": "struct FirStorage.FIR[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "getFIR",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dateOfBirth",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "addressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dateOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "timeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "placeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "faceDescriptor",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "image",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			}
+		],
+		"name": "getFIRByPhoneNumber",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dateOfBirth",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "addressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "dateOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "timeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "placeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "faceDescriptor",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "image",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			}
+		],
+		"name": "getIndexByPhoneNumber",
+		"outputs": [
+			{
+				"internalType": "enum FirStorage.FIRIndexStatus",
+				"name": "",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_dateOfBirth",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_addressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_dateOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_timeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_placeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_faceDescriptor",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_image",
+				"type": "string"
+			}
+		],
+		"name": "setFIR",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newDateOfBirth",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newAddressInfo",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newDateOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newTimeOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newPlaceOfIncident",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newDescription",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newFaceDescriptor",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_newImage",
+				"type": "string"
+			}
+		],
+		"name": "updateFIR",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]

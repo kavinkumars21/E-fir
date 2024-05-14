@@ -16,7 +16,8 @@ console.log(landmarksPoint)
           (participant) => participant._id == bestMatch._label
         );
         console.log(filterParticipants);
-        bestMatch._label = filterParticipants[0].firstName +" "+ filterParticipants[0].lastName;
+        
+        bestMatch._label = filterParticipants[0].name;
       }
 
       ctx.font = "normal 18px Gotham, Helvetica Neue, sans-serif";

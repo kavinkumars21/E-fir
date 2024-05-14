@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { AddFacePhoto } from './faceGallery/addFacePhoto';
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import abi from "../Util/SimpleStorage.json";
+import abi from "../Util/FirStorage.json";
+import "./style.css"
 
 function FirForm() {
 
-  const [firstName, setfirstname] = useState();
-  const [lastName, setlastname] = useState();
-  const [age, setage] = useState();
-  const [addressInfo, setaddress] = useState();
-  const [phoneNumber, setphonenumber] = useState();
-  const [section, setsection] = useState();
-  const [Image, setimage] = useState();
+  const [name, setName] = useState();
+  const [dateOfBirth, setDateOfBirth] = useState();
+  const [addressInfo, setAddressInfo] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [dateOfIncident, setDateOfIncident] = useState();
+  const [timeOfIncident, setTimeOfIncident] = useState();
+  const [placeOfIncident, setPlaceOfIncident] = useState();
+  const [description, setDescription] = useState();
   const [faceDescriptor, setFaceDescriptor] = useState();
+  const [image, setImage] = useState();
 
   const contractAddress = '';
   const contractAbi = abi;
@@ -41,7 +44,9 @@ function FirForm() {
     const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
     try {
-      await contract.setPerson(firstName, lastName, age, addressInfo, phoneNumber, section, faceDescriptor);
+      await contract.setFIR(
+        name, dateOfBirth, addressInfo, phoneNumber, dateOfIncident, timeOfIncident, placeOfIncident, description, faceDescriptor, image
+      );
       alert('Data stored successfully.');
     } catch (error) {
       console.error('Error storing data:', error);
@@ -50,45 +55,49 @@ function FirForm() {
   };
 
   const imagedetails = (data) => {
-    setimage(data.photoData);
+    setImage("null");
     setFaceDescriptor(data.faceDescriptor);
   }
-  
-  console.log(firstName, lastName, age, addressInfo, phoneNumber, section, Image, faceDescriptor);
+
+  console.log(name, dateOfBirth, addressInfo, phoneNumber, dateOfIncident, timeOfIncident, placeOfIncident, description, faceDescriptor, image);
 
   return (
-    <div>
-      <form onSubmit={handlesubmit}>
-        <label for="firstname">Firstname</label>
-        <br />
-        <input type="text" id="firstname" placeholder="Firstname" onChange={e => setfirstname(e.target.value)} />
-        <br />
-        <label for="lastname">Lastname</label>
-        <br />
-        <input type="text" id="lastname" placeholder="Lastname" onChange={e => setlastname(e.target.value)} />
-        <br />
-        <label for="age">Age</label>
-        <br />
-        <input type="number" id="age" placeholder="Age" onChange={e => setage(e.target.value)} />
-        <br />
-        <label for="address">Address</label>
-        <br />
-        <input type="text" id="address" placeholder="Address" onChange={e => setaddress(e.target.value)} />
-        <br />
-        <label for="phonenumber">Phone number</label>
-        <br />
-        <input type="tel" id="phonenumber" placeholder="Phone number" onChange={e => setphonenumber(e.target.value)} />
-        <br />
-        <label for="section">Des</label>
-        <br />
-        <input type="text" id="section" placeholder="Des" onChange={e => setsection(e.target.value)} />
-        <br />
-        <br />
-        <p>Upload Picture</p>
-        <AddFacePhoto imagedetails={imagedetails}/> {/* Pass imagedetails function as prop */}
-        <button>Submit</button>
-        <br />
-        <br />
+    <div className='main-component'>
+      <h1 className='register-header'>Register FIR</h1>
+      <form onSubmit={handlesubmit} className='form'>
+        <div className='form-inner'>
+          <div className='form-left'>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Name" onChange={e => setName(e.target.value)} />
+            <br />
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" placeholder="Date of Birth" onChange={e => setDateOfBirth(e.target.value)} />
+            <br />
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="Address" onChange={e => setAddressInfo(e.target.value)} />
+            <br />
+            <label for="phonenumber">Phone number</label>
+            <input type="tel" id="phonenumber" placeholder="Phone number" onChange={e => setPhoneNumber(e.target.value)} />
+            <br />
+            <label for="dateofincident">Date of Incident</label>
+            <input type="date" id="dateofincident" placeholder="Date of Incident" onChange={e => setDateOfIncident(e.target.value)} />
+            <br />
+            <label for="timeofincident">Time of Incident</label>
+            <input type="time" id="timeofincident" placeholder="Time of Incident" onChange={e => setTimeOfIncident(e.target.value)} />
+            <br />
+            <label for="placeofincident">Place of Incident</label>
+            <input type="text" id="placeofincident" placeholder="Place of Incident" onChange={e => setPlaceOfIncident(e.target.value)} />
+            <br />
+            <label for="description">Description</label>
+            <textarea type="" id="description" placeholder="Description" rows="1" onChange={e => setDescription(e.target.value)} />
+            <br />
+          </div>
+          <div className='form-right'>
+            <p>Upload Picture</p>
+            <AddFacePhoto imagedetails={imagedetails} /> {/* Pass imagedetails function as prop */}
+          </div>
+        </div>
+        <button className='submitbutton'>Submit</button>
       </form>
     </div>
   )

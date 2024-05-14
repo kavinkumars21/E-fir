@@ -1,7 +1,6 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Col, message, Modal, Row, Upload } from "antd";
+import { Button, Col, Modal, Row, Upload } from "antd";
 import React, { useState } from "react";
-import { CheckError } from "../../Util/ErrorHandling";
 import { getFullFaceDescription } from "../../faceUtil";
 
 function getBase64(file) {
@@ -113,7 +112,7 @@ export const UploadFromDisk = ({
             }
             onClick={handleSubmit}
           >
-            Save
+            Add Photo
           </Button>
         </Col>
       </Row>
@@ -146,16 +145,13 @@ export const UploadFromDisk = ({
           {fullDesc.map((desc, index) => (
             <div
               key={index}
-              style={{
-                wordBreak: "break-all",
-                marginBottom: "10px",
-                backgroundColor: "lightblue",
-              }}
             >
-              <p style={{ color: "red", fontSize: "20px", fontWeight: 900 }}>
-                Face #{index + 1}:{" "}
-              </p>{" "}
-              {desc.descriptor.toString()}
+              <p>
+                {/* Face #{index + 1}:{" "} */}
+                Generated descriptor for 1 face
+              </p>
+              {/* {" "} */}
+              {/* {desc.descriptor.toString()} */}
             </div>
           ))}
         </div>

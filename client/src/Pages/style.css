@@ -4,15 +4,95 @@
     justify-content: center;
     align-items: center;
 }
-
 .links {
     display: flex;
     gap: 40px;
 }
-
 .link {
     height: fit-content;
     text-decoration: none;
     font-size: 20px;
     font-weight: 500;
+}
+.update-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.heading{
+    margin-bottom: 20px;
+}
+.search-bar{
+    border: 2px solid;
+    border-color: gray;
+    width: 400px;
+    padding: 5px;
+    border-radius: 50px;
+}
+.search-section{
+    margin-bottom: 40px;
+}
+.search-button{
+    margin-left: 10px;
+    padding: 4px;
+    border: 2px solid;
+    border-color: gray;
+    border-radius: 5px;
+    background-color: white;
+}
+.update-form{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.form-label{
+    display: inline-block;
+    width:180px;
+}
+.form-input{
+    width: 300px;
+}
+.update-button{
+    width: 140px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: white;
+    border: 2px solid;
+    border-color: gray;
+}
+.update-message{
+    margin-top: 20px;
+    font-size: large;
+    font-weight: 600;
+    color: red;
+}
+.heading{
+    font-size: large;
+    margin-top: 50px;
+    text-align: center;
+}
+.result{
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+.firlabel{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    gap: 10px;
+}
+.firdata{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.firlabel p{
+    font-size: 16px;
+}
+.firdata p{
+    font-size: 16px;
 }

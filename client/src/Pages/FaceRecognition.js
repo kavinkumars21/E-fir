@@ -16,7 +16,8 @@ import ModelLoading from "../Util/ModelLoading";
 import ModelLoadStatus from "../Util/ModelLoadStatus";
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import abi from "../Util/SimpleStorage.json";
+import abi from "../Util/FirStorage.json";
+import './style.css'
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -36,6 +37,8 @@ function FaceRecognition() {
   const [data, setdata] = useState([]);
   const [faceMatcher, setFaceMatcher] = useState();
   const [participants, setParticipants] = useState([]);
+  const [result, setResult] = useState(false);
+  const [firData, setFirData] = useState();
 
   const [isAllModelLoaded, setIsAllModelLoaded] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
@@ -73,33 +76,35 @@ function FaceRecognition() {
   useEffect(() => {
     async function fetchData() {
       try {
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          const signer = await provider.getSigner();
-          const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-          const result = await contract.getAllPersons();
-        const data = result.map((person, index) => {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+        const result = await contract.getAllFIR();
+        const data = result.map((Fir, index) => {
           return {
-              _id: `${index + 1}`,
-              firstName: person[0],
-              lastName: person[1],
-              age: person[2],
-              address: person[3],
-              phonenumber: person[4],
-              section: person[5],
-              faceDescriptor: person[6]
+            _id: `${index + 1}`,
+            name: Fir[0],
+            dateOfBirth: Fir[1],
+            address: Fir[2],
+            phoneNumber: Fir[3],
+            dateOfIncident: Fir[4],
+            timeOfIncident: Fir[5],
+            placeOfIncident: Fir[6],
+            description: Fir[7],
+            faceDescriptor: Fir[8],
           };
-      });
-      console.log('Data from smart contract:', data);
-      setdata(data);
-      setParticipants(data);
-      return data;
+        });
+        console.log('Data from smart contract:', data);
+        setdata(data);
+        setParticipants(data);
+        return data;
       } catch (error) {
-          console.error('Error retrieving data:', error);
+        console.error('Error retrieving data:', error);
       }
-  }
-      fetchData()
-  },[])
-  
+    }
+    fetchData()
+  }, [])
+
   // useEffect(() => {
   //   async function fetch() {
   //     try {
@@ -187,6 +192,19 @@ function FaceRecognition() {
         clearInterval(interval);
         const ctx = canvasRef.current.getContext("2d");
         drawRectAndLabelFace(fullDesc, faceMatcher, participants, ctx);
+
+        if (!!fullDesc) {
+          fullDesc.map((desc) => {
+            const bestMatch = faceMatcher.findBestMatch(desc.descriptor);
+            if (bestMatch._label != "unknown") {
+              const index = bestMatch._label - 1;
+              setFirData(participants[index]);
+              setResult(true);
+              console.log(firData);
+            }
+          });
+        }
+
       }
     }, 700);
 
@@ -207,94 +225,121 @@ function FaceRecognition() {
   };
 
   return (
-    <Content>
-      <Card>
-        <Form>
-          <Form.Item label="Webcam">
-            <Select
-              defaultValue="Select Webcam"
-              style={{ width: 500 }}
-              onChange={handleSelectWebcam}
-            >
-              {inputDevices?.inputDevice?.map((device) => (
-                <Option key={device.deviceId} value={device.deviceId}>
-                  {device.label}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item label="Webcam Size">
-            <Select
-              defaultValue='640x480'
-              style={{ width: 200 }}
-              onChange={handleWebcamResolution}
-            >
-              {webcamResolutionType.map((type) => (
-                <Option key={type.label} value={type.label}>
-                  {type.label}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-        </Form>
+    <div>
+      <Content>
+        <Card>
+          <Form>
+            <Form.Item label="Webcam">
+              <Select
+                defaultValue="Select Webcam"
+                style={{ width: 500 }}
+                onChange={handleSelectWebcam}
+              >
+                {inputDevices?.inputDevice?.map((device) => (
+                  <Option key={device.deviceId} value={device.deviceId}>
+                    {device.label}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item label="Webcam Size">
+              <Select
+                defaultValue='640x480'
+                style={{ width: 200 }}
+                onChange={handleWebcamResolution}
+              >
+                {webcamResolutionType.map((type) => (
+                  <Option key={type.label} value={type.label}>
+                    {type.label}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Form>
 
-        {/* <Card>
+          {/* <Card>
           <Row>Face Descriptor Matcher: {facePhotos.length}</Row>
           <Row>Threshold Distance: {threshold}</Row>
         </Card> */}
 
-        {/* {facePhotos.length === 0 && (
+          {/* {facePhotos.length === 0 && (
           <p className="alert">No have any face matcher.</p>
           )} */}
-        <ModelLoadStatus errorMessage={loadingMessageError} />
+          <ModelLoadStatus errorMessage={loadingMessageError} />
 
-        {!isAllModelLoaded ? (
-          <ModelLoading loadingMessage={loadingMessage} />
-        ) : loadingMessageError ? (
-          <div className="error">{loadingMessageError}</div>
-        ) : (
-          <div></div>
-        )}
+          {!isAllModelLoaded ? (
+            <ModelLoading loadingMessage={loadingMessage} />
+          ) : loadingMessageError ? (
+            <div className="error">{loadingMessageError}</div>
+          ) : (
+            <div></div>
+          )}
 
-        {isAllModelLoaded && loadingMessageError.length == 0 && (
-          <Card className="takeAttendance__card__webcam">
-            <>
-              <p>{waitText}</p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Webcam
-                  muted={true}
-                  ref={webcamRef}
-                  audio={false}
-                  width={camWidth}
-                  height={camHeight}
-                  screenshotFormat="image/jpeg"
-                  videoConstraints={{
-                    deviceId: selectedWebcam,
-                  }}
-                  mirrored
-                />
-                <canvas
-                  ref={canvasRef}
+          {isAllModelLoaded && loadingMessageError.length == 0 && (
+            <Card className="takeAttendance__card__webcam">
+              <>
+                <p>{waitText}</p>
+                <div
                   style={{
-                    position: "absolute",
-                    textAlign: "center",
-                    zindex: 8,
-                    width: camWidth,
-                    height: camHeight,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
-                />
+                >
+                  <Webcam
+                    muted={true}
+                    ref={webcamRef}
+                    audio={false}
+                    width={camWidth}
+                    height={camHeight}
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={{
+                      deviceId: selectedWebcam,
+                    }}
+                    mirrored
+                  />
+                  <canvas
+                    ref={canvasRef}
+                    style={{
+                      position: "absolute",
+                      textAlign: "center",
+                      zindex: 8,
+                      width: camWidth,
+                      height: camHeight,
+                    }}
+                  />
+                </div>
+              </>
+            </Card>
+          )}
+        </Card>
+      </Content>
+      {result &&
+        <div>
+          <h1 className="heading">Fir Record found</h1>
+          <div className="result">
+            <div className="firlabel">
+              <p>Name</p>
+              <p>Date of Birth</p>
+              <p>Phone Number</p>
+              <p>Date of Incident</p>
+              <p>Time of Incident</p>
+              <p>Place of Incident</p>
+              <p>Description</p>
+            </div>
+              <div className="firdata">
+                <p>{firData.name}</p>
+                <p>{firData.dateOfBirth}</p>
+                <p>{firData.phoneNumber}</p>
+                <p>{firData.dateOfIncident}</p>
+                <p>{firData.timeOfIncident}</p>
+                <p>{firData.placeOfIncident}</p>
+                <p>{firData.description}</p>
               </div>
-            </>
-          </Card>
-        )}
-      </Card>
-    </Content>
+          </div>
+        </div>
+      }
+    </div>
   );
 };
 

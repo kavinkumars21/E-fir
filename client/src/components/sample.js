@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Web3 from 'web3';
 import { ethers } from 'ethers';
-import abi from "../Util/SimpleStorage.json";
+import abi from "../Util/FirStorage.json";
 
 function Sample() {
 
@@ -28,18 +28,21 @@ function Sample() {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
             const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-            const result = await contract.getAllPersons();
+            const result = await contract.getAllFIR();
             console.log('Data from smart contract:');
-          const data = result.map((person, index) => {
+          const data = result.map((fir, index) => {
             return {
                 _id: `${index + 1}`,
-                firstName: person[0],
-                lastName: person[1],
-                age: person[2],
-                address: person[3],
-                phonenumber: person[4],
-                section: person[5],
-                faceDescriptor: person[6]
+                name: fir[0],
+                dob: fir[1],
+                address: fir[2],
+                phoneNumber: fir[3],
+                doi: fir[4],
+                toi: fir[5],
+                poi: fir[6],
+                descriptor: fir[7],
+                faceDescriptor: fir[8],
+                image: fir[9],
             };
         });
         console.log('Data from smart contract:', data);
